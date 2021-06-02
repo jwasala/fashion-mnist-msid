@@ -1,4 +1,4 @@
-# The MIT License (MIT) Copyright © [2017] Zalando SE
+# The MIT License (MIT) Copyright © 2017 Zalando SE, https://tech.zalando.com
 def load_mnist(path, kind='train'):
     import os
     import gzip
