@@ -1,15 +1,21 @@
 import numpy as np
 
 
-def minkowski_distance(X, X_train):
+def euclidean_distance(X, X_train):
     """
-    Zwróć odległość Minkowskiego dla obiektów ze zbioru *X* od obiektów z *X_train*.
+    Zwróć odległość euklidesową dla obiektów ze zbioru *X* od obiektów z *X_train*.
 
     :param X: zbiór porównywanych obiektów N1xD
     :param X_train: zbiór obiektów do których porównujemy N2xD
     :return: macierz odległości pomiędzy obiektami z "X" i "X_train" N1xN2
     """
-    pass
+    dist = np.zeros((X.shape[0], X_train.shape[0]))
+
+    for i in range(X.shape[0]):
+        for j in range(X_train.shape[0]):
+            dist[i][j] = np.linalg.norm(X[i] - X_train[j])
+
+    return dist
 
 
 def sort_train_labels_knn(Dist, y):
@@ -70,7 +76,7 @@ def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
         najniższy, a "errors" - lista wartości błędów dla kolejnych
         "k" z "k_values"
     """
-    dist = minkowski_distance(X_val, X_train)
+    dist = euclidean_distance(X_val, X_train)
     sorted_train_labels = sort_train_labels_knn(dist, y_train)
     p_y_x = [p_y_x_knn(sorted_train_labels, k) for k in k_values]
     errors = [classification_error(i, y_val) for i in p_y_x]
