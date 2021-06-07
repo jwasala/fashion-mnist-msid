@@ -1,24 +1,29 @@
 import numpy as np
 
 
-def euclidean_distance(X, X_train):
+def euclidean_distance(X, X_train, debug=True):
     """
-    Zwróć odległość euklidesową dla obiektów ze zbioru *X* od obiektów z *X_train*.
+    Zwróć euclidean distance dla obiektów ze zbioru *X* od obiektów z *X_train*.
 
     :param X: zbiór porównywanych obiektów N1xD
     :param X_train: zbiór obiektów do których porównujemy N2xD
+    :param debug: print debug information
     :return: macierz odległości pomiędzy obiektami z "X" i "X_train" N1xN2
     """
     dist = np.zeros((X.shape[0], X_train.shape[0]))
 
+    if debug:
+        print('Evaluating euclidean distance.')
+
     for i in range(X.shape[0]):
-        for j in range(X_train.shape[0]):
-            dist[i][j] = np.linalg.norm(X[i] - X_train[j])
+        if debug and i % 50 == 0:
+            print(f'Finished {100 * i / X.shape[0]}%', end='\r', flush=True)
+        dist[i] = np.linalg.norm(X[i] - X_train, axis=1)
 
     return dist
 
 
-def sort_train_labels_knn(Dist, y):
+def sort_train_labels_knn(Dist, y, debug=True):
     """
     Posortuj etykiety klas danych treningowych *y* względem prawdopodobieństw
     zawartych w macierzy *Dist*.
@@ -30,7 +35,6 @@ def sort_train_labels_knn(Dist, y):
 
     Do sortowania użyj algorytmu mergesort.
     """
-
     return y[Dist.argsort(kind='mergesort')]
 
 
@@ -60,7 +64,7 @@ def classification_error(p_y_x, y_true):
     return np.sum([1 if (m - np.argmax(np.flip(p_y_x[i])) - 1) != y_true[i] else 0 for i in range(n)]) / n
 
 
-def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
+def model_selection_knn(X_val, X_train, y_val, y_train, k_values, debug=True):
     """
     Wylicz bład dla różnych wartości *k*. Dokonaj selekcji modelu KNN
     wyznaczając najlepszą wartość *k*, tj. taką, dla której wartość błędu jest
@@ -78,7 +82,13 @@ def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
     """
     dist = euclidean_distance(X_val, X_train)
     sorted_train_labels = sort_train_labels_knn(dist, y_train)
-    p_y_x = [p_y_x_knn(sorted_train_labels, k) for k in k_values]
+    p_y_x = []
+
+    for k in k_values:
+        if debug:
+            print('Evaluating p(y|x) for k = ', k, end='\r', flush=True)
+        p_y_x.append(p_y_x_knn(sorted_train_labels, k))
+
     errors = [classification_error(i, y_val) for i in p_y_x]
 
     lowest_err_index = np.argmin(errors)
