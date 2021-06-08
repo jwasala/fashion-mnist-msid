@@ -7,7 +7,7 @@ elements.
 
 A target algorithm would predict labels of images in test set, after training with labeled training set. Quality of an
 algorithm can be measured in terms of its accuracy; that is, the ratio of correct
-classifications to all classifications.
+classifications to the number of all classifications.
 
 ## Methods
 I considered two methods for completing this task, 1) *k*-nearest neighbors classifier, 2) ...
