@@ -1,7 +1,8 @@
+from constants import NUMBER_OF_CLASSES
 import numpy as np
 
 
-def euclidean_distance(X, X_train, debug=True):
+def euclidean_distance(X, X_train):
     """
     Zwróć euclidean distance dla obiektów ze zbioru *X* od obiektów z *X_train*.
 
@@ -12,18 +13,13 @@ def euclidean_distance(X, X_train, debug=True):
     """
     dist = np.zeros((X.shape[0], X_train.shape[0]))
 
-    if debug:
-        print('Evaluating euclidean distance.')
-
     for i in range(X.shape[0]):
-        if debug and i % 50 == 0:
-            print(f'Finished {100 * i / X.shape[0]}%', end='\r', flush=True)
         dist[i] = np.linalg.norm(X[i] - X_train, axis=1)
 
     return dist
 
 
-def sort_train_labels_knn(Dist, y, debug=True):
+def sort_train_labels_knn(Dist, y):
     """
     Posortuj etykiety klas danych treningowych *y* względem prawdopodobieństw
     zawartych w macierzy *Dist*.
@@ -48,7 +44,7 @@ def p_y_x_knn(y, k):
     :param k: liczba najbliższych sasiadow dla KNN
     :return: macierz prawdopodobieństw p(y|x) dla obiektów z "X" N1xM
     """
-    return [[l / k for l in np.bincount([y[i][j] for j in range(k)], minlength=np.max(y[0]) + 1)] for i in range(np.shape(y)[0])]
+    return [[l / k for l in np.bincount([y[i][j] for j in range(k)], minlength=NUMBER_OF_CLASSES)] for i in range(np.shape(y)[0])]
 
 
 def classification_error(p_y_x, y_true):
@@ -64,7 +60,7 @@ def classification_error(p_y_x, y_true):
     return np.sum([1 if (m - np.argmax(np.flip(p_y_x[i])) - 1) != y_true[i] else 0 for i in range(n)]) / n
 
 
-def model_selection_knn(X_val, X_train, y_val, y_train, k_values, debug=True):
+def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
     """
     Wylicz bład dla różnych wartości *k*. Dokonaj selekcji modelu KNN
     wyznaczając najlepszą wartość *k*, tj. taką, dla której wartość błędu jest
@@ -85,8 +81,6 @@ def model_selection_knn(X_val, X_train, y_val, y_train, k_values, debug=True):
     p_y_x = []
 
     for k in k_values:
-        if debug:
-            print('Evaluating p(y|x) for k = ', k, end='\r', flush=True)
         p_y_x.append(p_y_x_knn(sorted_train_labels, k))
 
     errors = [classification_error(i, y_val) for i in p_y_x]
