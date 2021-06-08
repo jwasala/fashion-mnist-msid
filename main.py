@@ -7,8 +7,8 @@ from models import preprocessing
 X_train, y_train = mnist_reader.load_mnist('data', kind='train')
 X_test, y_test = mnist_reader.load_mnist('data', kind='t10k')
 
-X_train = preprocessing.resize(X_train, 8)
-X_test = preprocessing.resize(X_test, 8)
+X_train = preprocessing.resize(X_train, 1)
+X_test = preprocessing.resize(X_test, 1)
 
 k = np.arange(1, 20)
 best_error, best_k, errors = knn.model_selection_knn(X_test, X_train, y_test, y_train, k)
