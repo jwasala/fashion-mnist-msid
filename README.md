@@ -29,6 +29,10 @@ features.
 | k-NN			| k=3, p=2, uniform weights		| -						| 784x1 all pixels, single channel	| 0.8527		|
 
 ## Usage
-In order to reproduce any of the results, download or clone this repository and install requirements with `py -m pip install
--r requirements.txt` (or its equivalent on your machine) from within project's root directory. Then run `py main.py -h`
+In order to reproduce the results, download or clone this repository and install requirements with `py -m pip install
+-r requirements.txt` (or its equivalent on your machine) from within project's root directory. Then refer to `py
+main.py -h`
 for further information.
+
+Python 3.9 is recommended. Repository already contains Fashion MNIST dataset, so no additional files have to be put in
+the project directory.
