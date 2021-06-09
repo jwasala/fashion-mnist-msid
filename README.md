@@ -33,6 +33,7 @@ and no extraction at all—in some tests, I passed all image data (all pixels' b
 ## Results
 | Method		| Parameters									| Preprocessing			| Features							| Accuracy		|
 | ----			| ----											| ----					| ----								| ----			|
+| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T>7		| 784x1 binary pixels				| 0.8615		|
 | k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T>4		| 784x1 binary pixels				| 0.8572		|
 | k-NN			| k=3, Euclidean distance, uniform weights		| -						| 784x1 all pixels, single channel	| 0.8527		|
 
