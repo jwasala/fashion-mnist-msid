@@ -25,9 +25,9 @@ As a measure of similarity, depending on features, I used
 between two points in Euclidean space and thus allows for object features to be any  real numbers. If features are
 binary, Hamming distance can be used.	
 
-Object features are represented by a vector of numbers. I tried several techniques of feature extraction, 1) ... 2) ...
-and no extraction at all—in one of the tests, I passed all image data (all pixels' brightnesses) as a vector of
-features.
+### Feature extraction
+I tried several techniques of feature extraction, 1) ... 2) ...
+and no extraction at all—in some tests, I passed all image data (all pixels' brightnesses) as a vector of features.
 
 
 ## Results
