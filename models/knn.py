@@ -2,6 +2,17 @@ from constants import NUMBER_OF_CLASSES
 import numpy as np
 
 
+def hamming_distance(X, X_train):
+    """
+    Zwróć odległość Hamminga dla obiektów ze zbioru *X* od obiektów z *X_train*.
+
+    :param X: zbiór porównywanych obiektów N1xD
+    :param X_train: zbiór obiektów do których porównujemy N2xD
+    :return: macierz odległości pomiędzy obiektami z "X" i "X_train" N1xN2
+    """
+    return ((1 - X) @ X_train.T) + (X @ (1 - X_train).T)
+
+
 def euclidean_distance(X, X_train):
     """
     Zwróć euclidean distance dla obiektów ze zbioru *X* od obiektów z *X_train*.
@@ -60,7 +71,7 @@ def classification_error(p_y_x, y_true):
     return np.sum([1 if (m - np.argmax(np.flip(p_y_x[i])) - 1) != y_true[i] else 0 for i in range(n)]) / n
 
 
-def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
+def model_selection_knn(X_val, X_train, y_val, y_train, k_values, dist_function):
     """
     Wylicz bład dla różnych wartości *k*. Dokonaj selekcji modelu KNN
     wyznaczając najlepszą wartość *k*, tj. taką, dla której wartość błędu jest
@@ -76,7 +87,7 @@ def model_selection_knn(X_val, X_train, y_val, y_train, k_values):
         najniższy, a "errors" - lista wartości błędów dla kolejnych
         "k" z "k_values"
     """
-    dist = euclidean_distance(X_val, X_train)
+    dist = dist_function(X_val, X_train)
     sorted_train_labels = sort_train_labels_knn(dist, y_train)
     p_y_x = []
 
