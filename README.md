@@ -31,8 +31,8 @@ features.
 
 
 ## Results
-| Method		| Parameters								| Preprocessing			| Features							| Accuracy		|
-| ----			| ----										| ----					| ----								| ----			|
+| Method		| Parameters									| Preprocessing			| Features							| Accuracy		|
+| ----			| ----											| ----					| ----								| ----			|
 | k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T>4		| 784x1 binary pixels				| 0.8572		|
 | k-NN			| k=3, Euclidean distance, uniform weights		| -						| 784x1 all pixels, single channel	| 0.8527		|
 
