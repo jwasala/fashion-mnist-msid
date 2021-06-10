@@ -44,15 +44,15 @@ Following figure present a subset of 72 samples from MNIST dataset before and af
 ![After applying thresholding](thresholding_after.png "After applying thresholding")
 
 ## Results
-| Method		| Parameters									| Preprocessing									| Features												| Accuracy
-| ----			| ----											| ----											| ----													| ----
-| CNN (2)		| 2 Conv + Pooling, 1 903 082 params			| Normalization, random translation and flip	| 784x1 [0..225] pixels, single channel	| 0.9044		|
-| CNN (2)		| 2 Conv + Pooling, 1 903 082 params			| -												| 784x1 [0..225] pixels, single channel	| 0.8892		|
-| CNN (1)		| 3 Conv + Pooling, 533 994 params				| -												| 784x1 [0..225] pixels, single channel	| 0.8870		|
-| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=10								| 784x1 [0..1] binary pixels			| 0.8634		|
-| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=13								| 784x1 [0..1] binary pixels			| 0.8608		|
-| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=4								| 784x1 [0..1] binary pixels			| 0.8572		|
-| k-NN			| k=3, Euclidean distance, uniform weights		| -												| 784x1 [0..225] pixels, single channel	| 0.8527		|
+| Method		| Parameters									| Preprocessing									| Features								| Accuracy
+| ----			| ----											| ----											| ----									| ----
+| CNN (3)		|												| -												| 										|
+| CNN (2)		|												| -												| 										|
+| CNN (1)		|												| -												|										|
+| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=10								| 784x1 [0..1] binary pixels			| 0.8634
+| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=13								| 784x1 [0..1] binary pixels			| 0.8608
+| k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=4								| 784x1 [0..1] binary pixels			| 0.8572
+| k-NN			| k=3, Euclidean distance, uniform weights		| -												| 784x1 [0..225] pixels, single channel	| 0.8527
 
 ## Usage
 In order to reproduce the results, download or clone this repository and install requirements with `py -m pip install
@@ -63,24 +63,6 @@ Python 3.9 is recommended. Repository already contains Fashion MNIST dataset, so
 the project directory.
 
 ## Appendix A. Architectures of used convolutional neural networks
-### CNN no 1, 533,994 parameters, 3 layers and pooling
-Layer type					| Output Shape		| Param
-----						| ----				| ----
-Conv2D						| 26, 26, 784		| 7840  
-MaxPooling2D				| 13, 13, 784		| 0
-Conv2D						| 11, 11, 64		| 451648
-MaxPooling2D				| 5, 5, 64			| 0
-Conv2D						| 3, 3, 64			| 36928
-Flatten						| 576				| 0
-Dense						| 64				| 36928
-Dense						| 10				| 650
-
-### CNN no 2, 1,903,082 parameters, 2 layers and pooling
-Layer type					| Output Shape		| Param
-----						| ----				| ----
-Conv2D						| 26, 26, 784		| 7840
-MaxPooling2D				| 13, 13, 784		| 0
-Conv2D						| 11, 11, 128		| 903296
-Flatten						| 15488				| 0
-Dense						| 64				| 991296
-Dense						| 10				| 650       
+### CNN no 1
+### CNN no 2
+### CNN no 3

@@ -32,6 +32,8 @@ if __name__ == '__main__':
             cnn.cnn_1
         ])
 
+        cnn.cnn_1.summary()
+
         model.compile(
             optimizer='adam',
             loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
