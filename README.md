@@ -10,10 +10,9 @@ algorithm can be measured in terms of its accuracy; that is, the ratio of correc
 of all classifications.
 
 ## Methods
-### Models
 I considered two models for completing this task, 1) *k*-nearest neighbors classifier, 2) convolutional neural network.
 
-#### *k*-nearest neighbors
+### *k*-nearest neighbors
 The *k*-nearest neighbors (k-NN) is a non-parametric algorithm that labels new objects based on labels of *k* most
 similar training objects.
 
@@ -23,14 +22,7 @@ As a measure of similarity, depending on features, I used
 between two points in Euclidean space and thus allows for object features to be any  real numbers. If all features are
 binary, Hamming distance can be used.
 
-#### Convolutional neural network
-I tested several convolutional neural networks.
-
-### Feature extraction
-I tried several techniques of feature extraction, 1) thresholding, 2) ...
-and no extraction at all—in some tests, I passed all image data (all pixels' brightnesses) as a vector of features.
-
-#### Thresholding
+#### Thresholding as feature extraction
 In the thresholding process, every pixel's brightness is replaced with 0, if its brightness (represented by an
 integer from 0 to 255) is lower than some constant T, or 1 otherwise.
 
@@ -42,6 +34,11 @@ Following figure present a subset of 72 samples from MNIST dataset before and af
 
 ![Before applying thresholding](thresholding_before.png "Before applying thresholding")
 ![After applying thresholding](thresholding_after.png "After applying thresholding")
+
+### Convolutional neural network
+I tested several convolutional neural networks.
+
+For the data augmentation, I used vertical flips and random vertical translations.
 
 ## Results
 | Method		| Parameters									| Preprocessing									| Features								| Accuracy
