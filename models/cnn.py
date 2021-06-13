@@ -8,9 +8,9 @@ preprocessing = models.Sequential([
 ])
 
 cnn_1 = models.Sequential([
-    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
-    layers.Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28, 1)),
-    layers.Conv2D(128, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    layers.Conv2D(32, (3, 4), activation='relu', input_shape=(28, 28, 1)),
+    layers.Conv2D(64, (3, 4), activation='relu', input_shape=(28, 28, 1)),
+    layers.Conv2D(128, (3, 4), activation='relu', input_shape=(28, 28, 1)),
     layers.MaxPooling2D((2, 2)),
     layers.Dropout(0.25),
     layers.Flatten(),
