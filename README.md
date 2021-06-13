@@ -2,7 +2,7 @@
 This repository presents a machine learning solution for classifying Fashion MNIST dataset.
 
 Fashion MNIST dataset contains 70,000 examples of 28x28 grayscale images of garment, each labelled with one of the ten
-categories. Examples have been split into two groups, 1) test set with 10,000 elements, 2) training set with 60,000
+categories. Examples have been split into two groups, 1) test set with 10 000 elements, 2) training set with 60 000
 elements.
 
 A target algorithm would predict labels of images in test set, after training with labeled training set. Quality of an
@@ -23,6 +23,9 @@ between two points in Euclidean space and thus allows for object features to be 
 binary, Hamming distance can be used.
 
 #### Thresholding as feature extraction
+Even though it is not necessary, I tested thresholding as a feature extraction method and compared the results with
+no feature extraction.
+
 In the thresholding process, every pixel's brightness is replaced with 0, if its brightness (represented by an
 integer from 0 to 255) is lower than some constant T, or 1 otherwise.
 
@@ -36,20 +39,28 @@ Following figure present a subset of 72 samples from MNIST dataset before and af
 ![After applying thresholding](thresholding_after.png "After applying thresholding")
 
 ### Convolutional neural network
-I tested several convolutional neural networks.
+I tested several convolutional neural networks and noted the best two of them below. Convolutional neural networks
+are a subclass of neural networks that consist of feature extraction layers and classification layers. The latter part
+is simply a multilayer perceptron. In feature extraction layers, initial vector is split into a set of feature maps
+of the image and thus there is no need to perform any additional feature extraction beforehand.
 
-For the data augmentation, I used vertical flips and random vertical translations.
+I decided to use convolutional neural networks because they are known to have great performance in image classification
+problems. Following figure presents one of the architectures of CNN that I present in the Results section, labeled as
+*CNN (1)*.
+
+![CNN (1) architecture](cnn_visualization.png "CNN (1) architecture")
+
+Architectures of both presented networks, including the one visualized above, are also described in Appendix A.
 
 ## Results
 | Method		| Parameters									| Preprocessing									| Features								| Accuracy
 | ----			| ----											| ----											| ----									| ----
-| CNN (3)		|												| -												| 										|
-| CNN (2)		|												| -												| 										|
-| CNN (1)		|												| -												|										|
+| CNN (1)		| 3 Conv, kernel size (3, 3), ~4.1M parameters	| Random flip and translation, rescaling		| 784x1 [0..1] pixels, single channel	| 0.9174
+| CNN (2)		| 2 Conv, kernel size (5, 5), ~879K parameters	| Random flip and translation, rescaling		| 784x1 [0..1] pixels, single channel	| 0.9100
 | k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=10								| 784x1 [0..1] binary pixels			| 0.8634
 | k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=13								| 784x1 [0..1] binary pixels			| 0.8608
 | k-NN			| k=7, Hamming distance, uniform weights		| Thresholding T=4								| 784x1 [0..1] binary pixels			| 0.8572
-| k-NN			| k=3, Euclidean distance, uniform weights		| -												| 784x1 [0..225] pixels, single channel	| 0.8527
+| k-NN			| k=3, Euclidean distance, uniform weights		| None											| 784x1 [0..255] pixels, single channel	| 0.8527
 
 ## Usage
 In order to reproduce the results, download or clone this repository and install requirements with `py -m pip install
@@ -61,5 +72,33 @@ the project directory.
 
 ## Appendix A. Architectures of used convolutional neural networks
 ### CNN no 1
+Layer type      	          	| Output shape        	| Param
+----							| ----					| ----
+Conv2D			             	| 26, 26, 32  			| 320       
+Conv2D         				  	| 24, 24, 64  			| 18 496     
+Conv2D          			 	| 22, 22, 128 			| 73 856     
+MaxPooling2D					| 11, 11, 128 			| 0         
+Dropout      			     	| 11, 11, 128 			| 0         
+Flatten       			    	| 15 488       			| 0         
+Dense          			     	| 256         			| 3 965 184   
+Dense          				   	| 128         			| 32 896     
+Dense      				       	| 10          			| 1 290      
+
+* Total params: 4 092 042
+* Trainable params: 4 092 042
+* Non-trainable params: 0
+
 ### CNN no 2
-### CNN no 3
+Layer type      	          	| Output shape        	| Param
+----							| ----					| ----
+Conv2D			             	| 24, 24, 32  			| 832 
+Conv2D			             	| 20, 20, 64  			| 51 264
+MaxPooling2D					| 10, 10, 64 			| 0
+Flatten       			    	| 6 400       			| 0
+Dense          				   	| 128         			| 819 328
+Dropout      			     	| 128					| 0
+Dense      				       	| 10          			| 1 290
+
+* Total params: 872 714
+* Trainable params: 872 714
+* Non-trainable params: 0

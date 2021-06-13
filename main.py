@@ -28,11 +28,11 @@ if __name__ == '__main__':
         y_train = y_train[:50000]
 
         model = models.Sequential([
-            cnn.preprocessing,
-            cnn.cnn_1
+            # cnn.preprocessing,
+            cnn.cnn_3
         ])
 
-        cnn.cnn_1.summary()
+        cnn.cnn_3.summary()
 
         model.compile(
             optimizer='adam',
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             metrics=['accuracy']
         )
 
-        model.fit(X_train, y_train, epochs=10, validation_data=(X_val, y_val))
+        model.fit(X_train, y_train, epochs=40, validation_data=(X_val, y_val))
 
         test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
 
