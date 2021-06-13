@@ -33,7 +33,8 @@ Motivation for using thresholding in the feature extraction process is that the 
 primarily designated by its shape rather than its color. Thresholding removes information about specific shade of
 presented garment, effectively leaving only information about its shape.
 
-Following figure present a subset of 72 samples from MNIST dataset before and after applying thresholding T=10.
+Following figure present a subset of 72 samples from the Fashion MNIST dataset before and after applying thresholding
+T=10.
 
 ![Before applying thresholding](thresholding_before.png "Before applying thresholding")
 ![After applying thresholding](thresholding_after.png "After applying thresholding")
