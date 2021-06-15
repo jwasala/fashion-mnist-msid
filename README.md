@@ -1,7 +1,7 @@
 ## Introduction
-This repository presents a machine learning solution for classifying Fashion MNIST dataset.
+This repository presents a machine learning solution for classifying the Fashion MNIST dataset.
 
-Fashion MNIST dataset contains 70,000 examples of 28x28 grayscale images of garment, each labelled with one of the ten
+The fashion MNIST dataset contains 70,000 examples of 28x28 grayscale images of garment, each labelled with one of the ten
 categories. Examples have been split into two groups, 1) test set with 10 000 elements, 2) training set with 60 000
 elements.
 
