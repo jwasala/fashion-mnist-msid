@@ -84,7 +84,7 @@ In order to reproduce the results, download or clone this repository and install
 k-nearest neighbors algorithm, run `py main.py -knn`, and for presentation of convolutional neural network 1 or 2, run
 `py main.py -cnn (1|2)`.
 
-Python 3.9 is recommended. Repository already contains Fashion MNIST dataset, so no additional files have to be put in
+Python 3.9 is recommended. Repository already contains Fashion MNIST dataset, so additional files do not have to be put in
 the project directory.
 
 ## Appendix A. Architectures of used convolutional neural networks
